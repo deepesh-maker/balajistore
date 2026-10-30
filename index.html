@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Balaji Super Store</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark">B</div>
+    <div><h1>Balaji Super Store</h1><p>Everyday essentials, made easy</p></div>
+    <button id="adminOpenBtn" class="button button-outline small">Admin</button>
+  </header>
+
+  <main class="container">
+    <section class="contact-strip">
+      <div><span class="eyebrow">CONTACT</span><strong>9996084839</strong></div>
+      <div><span class="eyebrow">STORE ADDRESS</span><strong>Rewari, Kankarwali, near RBS School</strong></div>
+    </section>
+
+    <section id="welcomeView" class="panel hero">
+      <div class="hero-copy">
+        <span class="pill">WELCOME</span>
+        <h2>Your daily needs,<br><span>one simple order.</span></h2>
+        <p>Enter your 10-digit mobile number to place an order or check an order with its tracking code.</p>
+      </div>
+      <form id="customerLoginForm" class="form-card">
+        <label for="customerPhone">Mobile number</label>
+        <input id="customerPhone" name="phone" inputmode="numeric" autocomplete="tel" maxlength="10" placeholder="Enter 10-digit number" required>
+        <p class="hint">No OTP is sent. A mobile number alone does not verify identity.</p>
+        <button class="button button-primary" type="submit">Continue as customer <span>→</span></button>
+        <div class="or-line"><span>OR</span></div>
+        <label for="trackingLookup">Already have a tracking code?</label>
+        <input id="trackingLookup" placeholder="Paste tracking code">
+        <button id="trackOrderBtn" class="button button-light" type="button">Track order</button>
+        <p id="customerLoginMessage" class="message" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section id="customerView" class="panel hidden">
+      <div class="section-heading">
+        <div><span class="eyebrow">CUSTOMER PORTAL</span><h2>Place an order</h2></div>
+        <button id="customerBackBtn" class="button button-light small" type="button">Back</button>
+      </div>
+      <p class="subtle">Mobile number: <strong id="shownPhone"></strong></p>
+      <form id="orderForm" class="stack">
+        <label for="orderDetails">What would you like to order?</label>
+        <textarea id="orderDetails" rows="4" maxlength="2000" placeholder="Write your items and quantities here…" required></textarea>
+        <label for="deliveryAddress">Delivery address</label>
+        <textarea id="deliveryAddress" rows="3" maxlength="500" placeholder="House number, street, area, landmark…" required></textarea>
+        <button class="button button-primary" type="submit">Submit order <span>→</span></button>
+        <p id="orderMessage" class="message" aria-live="polite"></p>
+      </form>
+      <div class="divider"></div>
+      <div class="section-heading"><div><span class="eyebrow">YOUR TRACKING CODES</span><h3>Pending orders on this device</h3></div><button id="refreshCustomerOrders" class="button button-light small" type="button">Refresh</button></div>
+      <p class="hint">Completed orders disappear from this list. Save each tracking code if you want to check it on another device.</p>
+      <div id="customerOrders" class="order-list"></div>
+    </section>
+
+    <section id="trackingView" class="panel hidden">
+      <div class="section-heading"><div><span class="eyebrow">ORDER TRACKING</span><h2>Order status</h2></div><button id="trackingBackBtn" class="button button-light small" type="button">Back</button></div>
+      <div id="trackingResult"></div>
+    </section>
+
+    <section id="adminLoginView" class="panel narrow hidden">
+      <div class="section-heading"><div><span class="eyebrow">RESTRICTED AREA</span><h2>Admin login</h2></div><button id="adminCancelBtn" class="button button-light small" type="button">Back</button></div>
+      <p class="subtle">Sign in using the admin account created in Supabase Authentication.</p>
+      <form id="adminLoginForm" class="stack">
+        <label for="adminEmail">Admin email</label><input id="adminEmail" type="email" autocomplete="username" required placeholder="admin@example.com">
+        <label for="adminPassword">Password</label><input id="adminPassword" type="password" autocomplete="current-password" required placeholder="Admin password">
+        <button class="button button-primary" type="submit">Sign in</button>
+        <p id="adminLoginMessage" class="message" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section id="adminView" class="panel hidden">
+      <div class="section-heading"><div><span class="eyebrow">STORE MANAGEMENT</span><h2>All orders</h2><p class="subtle">Only an approved admin account can view these orders.</p></div><button id="adminLogoutBtn" class="button button-light small" type="button">Log out</button></div>
+      <div class="admin-tools"><button id="refreshAdminOrders" class="button button-primary small" type="button">Refresh orders</button><span id="adminMessage" class="message" aria-live="polite"></span></div>
+      <div id="adminOrders" class="order-list"></div>
+    </section>
+
+    <section id="thankYouView" class="panel thankyou hidden">
+      <div class="success-icon"><span>✓</span></div>
+      <span class="eyebrow">ORDER RECEIVED</span>
+      <h2>Thank you!</h2>
+      <p>Your order has been sent to Balaji Super Store.</p>
+      <div class="tracking-code-wrap"><span>Save this tracking code</span><strong id="newTrackingCode"></strong><button id="copyTrackingBtn" class="button button-light small" type="button">Copy code</button></div>
+      <p class="hint">Keep this code private. Anyone with the code may be able to check this order's status.</p>
+      <button id="thankYouDoneBtn" class="button button-primary" type="button">Done</button>
+    </section>
+  </main>
+  <footer>© Balaji Super Store · Rewari</footer>
+</body>
+</html>
